@@ -1,0 +1,28 @@
+{
+  "name": "todolist",
+  "version": "1.0.0",
+  "description": "Semestral project in BCAA Summer 2024",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node server/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kubadrbohlav/todolist.git"
+  },
+  "keywords": [
+    "todolist",
+    "react",
+    "express"
+  ],
+  "author": "Jakub Drbohlav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kubadrbohlav/todolist/issues"
+  },
+  "homepage": "https://github.com/kubadrbohlav/todolist#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
