@@ -50,6 +50,7 @@ async function CreateAbl(req, res) {
       res.status(400).json({
         code: "titleAlreadyExists",
         message: "Task List with specified title already exists.",
+        titleAlreadyExists: tasklist.title,
       });
       return;
     }

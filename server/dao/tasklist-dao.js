@@ -57,8 +57,26 @@ function create(tasklist) {
   }
 }
 
+// Updates existing tasklist
+function update(tasklist) {
+  try {
+    const currentTasklisk = get(tasklist.id);
+    if (!currentTasklisk) {
+      return null;
+    }
+    const newTasklist = { ...currentTasklisk, ...tasklist };
+    const filePath = path.join(TASKLIST_FOLDER_PATH, `${tasklist.id}.json`);
+    const fileData = JSON.stringify(newTasklist);
+    fs.writeFileSync(filePath, fileData, "utf8");
+    return newTasklist;
+  } catch (error) {
+    throw { code: "failedToUpdateTasklist", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   list,
   create,
+  update,
 };
