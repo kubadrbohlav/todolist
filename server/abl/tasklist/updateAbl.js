@@ -42,7 +42,7 @@ async function UpdateAbl(req, res) {
     }
 
     // Invalid color hex code
-    if (tasklist.color && !/[a-f0-9]{6}|[a-f0-9]{3}/.test(tasklist.color)) {
+    if (tasklist.color && !/^([a-f0-9]{6}|[a-f0-9]{3})$/.test(tasklist.color)) {
       console.warn("Invalid color hex code, not overwriting color.");
       delete tasklist.color;
     }

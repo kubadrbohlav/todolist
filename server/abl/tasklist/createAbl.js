@@ -31,7 +31,7 @@ async function CreateAbl(req, res) {
     }
 
     // Invalid color hex code
-    if (tasklist.color && !/[a-f0-9]{6}|[a-f0-9]{3}/.test(tasklist.color)) {
+    if (tasklist.color && !/^([a-f0-9]{6}|[a-f0-9]{3})$/.test(tasklist.color)) {
       res.statusMessage = "Invalid color hex code.";
       tasklist.color = null;
     }
