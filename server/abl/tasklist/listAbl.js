@@ -8,7 +8,7 @@ const tasklistDao = require("../../dao/tasklist-dao");
 const schema = {
   type: "object",
   properties: {
-    title: { type: "string" },
+    title: { type: "string", minLength: 1 },
   },
   required: [],
   additionalProperties: false,

@@ -9,7 +9,7 @@ const schema = {
   type: "object",
   properties: {
     id: { type: "string", minLength: 32, maxLength: 32 },
-    title: { type: "string" },
+    title: { type: "string", minLength: 1 },
     color: { type: ["string", "null"] },
   },
   required: ["id"],
@@ -37,15 +37,6 @@ async function UpdateAbl(req, res) {
         code: "invalidTasklistId",
         message: "Tasklist ID is invalid.",
         invalidId: tasklist.id,
-      });
-      return;
-    }
-
-    // Empty title
-    if (tasklist.title === "") {
-      res.status(400).json({
-        code: "emptyTitle",
-        message: "Cannot create task list with empty title.",
       });
       return;
     }

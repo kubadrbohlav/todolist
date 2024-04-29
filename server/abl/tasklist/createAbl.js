@@ -8,10 +8,10 @@ const tasklistDao = require("../../dao/tasklist-dao");
 const schema = {
   type: "object",
   properties: {
-    title: { type: "string" },
+    title: { type: "string", minLength: 1 },
     color: { type: ["string", "null"] },
   },
-  required: ["title", "color"],
+  required: ["title"],
   additionalProperties: false,
 };
 
@@ -26,15 +26,6 @@ async function CreateAbl(req, res) {
         code: "invalidDtoIn",
         message: "DtoIn is not valid.",
         validationError: ajv.errors,
-      });
-      return;
-    }
-
-    // Empty title
-    if (tasklist.title === "") {
-      res.status(400).json({
-        code: "emptyTitle",
-        message: "Cannot create task list with empty title.",
       });
       return;
     }

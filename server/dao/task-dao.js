@@ -54,9 +54,7 @@ function list(done, tasklistId, deadlineUntil) {
     // Filter deadline
     if (deadlineUntil) {
       const maxDate = new Date(deadlineUntil).getTime();
-      //console.log("Max: " + maxDate);
       tasks = tasks.filter((a) => {
-        //console.log("Cur: " + new Date(a.deadline).getTime());
         return new Date(a.deadline).getTime() <= maxDate;
       });
     }

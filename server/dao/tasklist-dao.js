@@ -48,6 +48,8 @@ function list(title) {
 function create(tasklist) {
   try {
     tasklist.id = crypto.randomBytes(16).toString("hex");
+    tasklist.color = tasklist.color || null;
+
     const filePath = path.join(TASKLIST_FOLDER_PATH, `${tasklist.id}.json`);
     const fileData = JSON.stringify(tasklist);
     fs.writeFileSync(filePath, fileData, "utf8");
