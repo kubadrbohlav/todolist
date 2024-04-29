@@ -74,9 +74,25 @@ function update(tasklist) {
   }
 }
 
+// Deletes tasklist
+function remove(id) {
+  try {
+    const filePath = path.join(TASKLIST_FOLDER_PATH, `${id}.json`);
+    fs.unlinkSync(filePath);
+
+    // TODO: delete tasklist ID for all tasks that contain it
+
+    return { status: "ok" };
+  } catch (error) {
+    if (error.code === "ENOENT") return { status: "notFound" };
+    throw { code: "failedToDeleteTasklist", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   list,
   create,
   update,
+  remove,
 };
