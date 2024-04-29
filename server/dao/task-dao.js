@@ -61,7 +61,39 @@ function list(done, tasklistId, deadlineUntil) {
   }
 }
 
+// Creates new task
+function create(task) {
+  try {
+    task.id = crypto.randomBytes(16).toString("hex");
+    task.done = false;
+    task.completedDate = null;
+    task.priority = task.priority || "none";
+    task.description = task.description || "";
+    task.tasklistId = task.tasklistId || null;
+
+    if (!task.deadline) {
+      const now = new Date();
+      const year = now.getFullYear();
+      let month = now.getMonth() + 1;
+      month = month < 10 ? "0" + month : month.toString();
+      let day = now.getDate();
+      day = day < 10 ? "0" + day : day.toString();
+
+      task.deadline = `${year}-${month}-${day}`;
+    }
+
+    const filePath = path.join(TASK_FOLDER_PATH, `${task.id}.json`);
+    const fileData = JSON.stringify(task);
+    fs.writeFileSync(filePath, fileData, "utf8");
+
+    return task;
+  } catch (error) {
+    throw { code: "failedToCreateTask", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   list,
+  create,
 };
