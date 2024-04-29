@@ -2,6 +2,8 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 
+const taskDao = require("./task-dao");
+
 const TASKLIST_FOLDER_PATH = path.join(__dirname, "storage", "tasklist");
 
 // Gets tasklist by ID
@@ -82,7 +84,13 @@ function remove(id) {
     const filePath = path.join(TASKLIST_FOLDER_PATH, `${id}.json`);
     fs.unlinkSync(filePath);
 
-    // TODO: delete tasklist ID for all tasks that contain it
+    // delete tasklist ID for all tasks that contain it
+    taskDao.list(null, id, null).forEach((task) => {
+      taskDao.update({
+        id: task.id,
+        tasklistId: null,
+      });
+    });
 
     return { status: "ok" };
   } catch (error) {

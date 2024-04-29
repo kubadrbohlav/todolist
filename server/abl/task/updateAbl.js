@@ -22,7 +22,12 @@ const schema = {
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
     },
     done: { type: "boolean" },
-    tasklistId: { type: "string", minLength: 32, maxLength: 32 },
+    tasklistId: {
+      anyOf: [
+        { type: "string", minLength: 32, maxLength: 32 },
+        { type: "null" },
+      ],
+    },
   },
   required: ["id"],
   additionalProperties: false,

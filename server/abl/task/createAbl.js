@@ -20,7 +20,12 @@ const schema = {
       format: "date",
       pattern: "^\\d{4}-\\d{2}-\\d{2}$",
     },
-    tasklistId: { type: "string" },
+    tasklistId: {
+      anyOf: [
+        { type: "string", minLength: 32, maxLength: 32 },
+        { type: "null" },
+      ],
+    },
   },
   required: ["title"],
   additionalProperties: false,
