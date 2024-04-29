@@ -35,7 +35,7 @@ function list(done, tasklistId, deadlineUntil) {
     const files = fs.readdirSync(TASK_FOLDER_PATH);
     let tasks = files.map((file) => {
       const fileData = fs.readFileSync(
-        path.join(TASKLIST_FOLDER_PATH, file),
+        path.join(TASK_FOLDER_PATH, file),
         "utf8"
       );
       return JSON.parse(fileData);
@@ -53,9 +53,11 @@ function list(done, tasklistId, deadlineUntil) {
 
     // Filter deadline
     if (deadlineUntil) {
-      const maxDate = new Date(deadlineUntil);
+      const maxDate = new Date(deadlineUntil).getTime();
+      //console.log("Max: " + maxDate);
       tasks = tasks.filter((a) => {
-        new Date(a.deadline) <= maxDate;
+        //console.log("Cur: " + new Date(a.deadline).getTime());
+        return new Date(a.deadline).getTime() <= maxDate;
       });
     }
 
@@ -121,9 +123,23 @@ function update(task) {
   }
 }
 
+// Deletes task
+function remove(id) {
+  try {
+    const filePath = path.join(TASK_FOLDER_PATH, `${id}.json`);
+    fs.unlinkSync(filePath);
+
+    return { status: "ok" };
+  } catch (error) {
+    if (error.code === "ENOENT") return { status: "notFound" };
+    throw { code: "failedToDeleteTask", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   list,
   create,
   update,
+  remove,
 };
