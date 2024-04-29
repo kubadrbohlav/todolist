@@ -4,6 +4,17 @@ const crypto = require("crypto");
 
 const TASK_FOLDER_PATH = path.join(__dirname, "storage", "task");
 
+function _getCurrentDate() {
+  const now = new Date();
+  const year = now.getFullYear();
+  let month = now.getMonth() + 1;
+  month = month < 10 ? "0" + month : month.toString();
+  let day = now.getDate();
+  day = day < 10 ? "0" + day : day.toString();
+
+  return `${year}-${month}-${day}`;
+}
+
 // Gets task by ID
 function get(id) {
   try {
@@ -72,14 +83,7 @@ function create(task) {
     task.tasklistId = task.tasklistId || null;
 
     if (!task.deadline) {
-      const now = new Date();
-      const year = now.getFullYear();
-      let month = now.getMonth() + 1;
-      month = month < 10 ? "0" + month : month.toString();
-      let day = now.getDate();
-      day = day < 10 ? "0" + day : day.toString();
-
-      task.deadline = `${year}-${month}-${day}`;
+      task.deadline = _getCurrentDate();
     }
 
     const filePath = path.join(TASK_FOLDER_PATH, `${task.id}.json`);
@@ -92,8 +96,34 @@ function create(task) {
   }
 }
 
+// Updates existing task
+function update(task) {
+  try {
+    const currentTask = get(task.id);
+    if (!currentTask) {
+      return null;
+    }
+
+    const newTask = { ...currentTask, ...task };
+
+    if (newTask.done) {
+      newTask.completedDate = _getCurrentDate();
+    } else {
+      newTask.completedDate = null;
+    }
+
+    const filePath = path.join(TASK_FOLDER_PATH, `${task.id}.json`);
+    const fileData = JSON.stringify(newTask);
+    fs.writeFileSync(filePath, fileData, "utf8");
+    return newTask;
+  } catch (error) {
+    throw { code: "failedToUpdateTask", message: error.message };
+  }
+}
+
 module.exports = {
   get,
   list,
   create,
+  update,
 };
