@@ -19,7 +19,7 @@ function TaskListProvider({ children }) {
     });
     const responseJson = await response.json();
     if (response.status < 400) {
-      setTaskListLoadObject({ state: "ready", data: responseJson });
+      setTaskListLoadObject({ state: "ready", data: responseJson.tasklists });
       return responseJson;
     } else {
       setTaskListLoadObject((current) => ({
@@ -32,7 +32,7 @@ function TaskListProvider({ children }) {
   }
 
   async function handleCreate(dtoIn) {
-    setTaskListLoadObject((current) => ({ ...current, state: "pending" }));
+    //setTaskListLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8123/tasklist/create`, {
       method: "POST",
       headers: {
@@ -60,7 +60,11 @@ function TaskListProvider({ children }) {
       return responseJson;
     } else {
       setTaskListLoadObject((current) => {
-        return { state: "error", data: current.data, error: responseJson };
+        return {
+          state: "error",
+          data: current.data,
+          error: responseJson,
+        };
       });
       throw new Error(JSON.stringify(responseJson, null, 2));
     }

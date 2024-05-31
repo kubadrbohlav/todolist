@@ -2,42 +2,32 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import TaskListProvider from "./TaskListProvider";
 import TaskProvider from "./TaskProvider";
+import Layout from "./Layout";
+import TaskList from "./TaskList";
+import Task from "./Task";
 
 function App() {
+  //const [searchParams] = useSearchParams();
+  //const taskListId = searchParams.get("list");
+  //const taskId = searchParams.get("task");
+
   return (
-    <div style={componentStyle()}>
+    <div id="app-container">
       <TaskListProvider>
         <TaskProvider>
-          <BrowserRouter></BrowserRouter>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route path="list" element={<TaskList />} />
+                <Route path="task" element={<Task />} />
+                <Route path="*" element={"not found"} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </TaskProvider>
       </TaskListProvider>
     </div>
   );
 }
-
-function componentStyle() {
-  return {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    overflow: "hidden",
-    backgroundColor: "#187bcd",
-  };
-}
-
-/*<Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<EventList />} />
-              <Route
-                path="eventDetail"
-                element={
-                  <EventProvider>
-                    <EventRoute />
-                  </EventProvider>
-                }
-              />
-              <Route path="*" element={"not found"} />
-            </Route>
-          </Routes>*/
 
 export default App;
