@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const QuickLinks = () => {
   return (
     <ul id="quick-links">
       <li>
-        <Link to="/today">Dnes</Link>
+        <NavLink to="/today">Dnes</NavLink>
       </li>
       <li>
-        <Link to="/next-7-days">Dalších 7 dní</Link>
+        <NavLink to="/next-7-days">Dalších 7 dní</NavLink>
       </li>
       <li>
-        <Link to="/">Inbox</Link>
+        <NavLink to="/">Inbox</NavLink>
       </li>
     </ul>
   );

@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { TaskListContext } from "./TaskListContext.js";
 
 import Modal from "react-bootstrap/Modal";
@@ -11,6 +12,7 @@ import Icon from "@mdi/react";
 import { mdiLoading } from "@mdi/js";
 
 function TaskListForm({ setShowTasklistForm, tasklist }) {
+  const navigate = useNavigate();
   const { state, handlerMap } = useContext(TaskListContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
@@ -23,7 +25,13 @@ function TaskListForm({ setShowTasklistForm, tasklist }) {
           e.stopPropagation();
           var formData = Object.fromEntries(new FormData(e.target));
           try {
-            await handlerMap.handleCreate(formData);
+            if (tasklist?.id) {
+              formData.id = tasklist.id;
+              await handlerMap.handleUpdate(formData);
+            } else {
+              const newTasklist = await handlerMap.handleCreate(formData);
+              navigate(`/list?id=${newTasklist.id}`);
+            }
 
             setShowTasklistForm(false);
           } catch (e) {
@@ -33,7 +41,11 @@ function TaskListForm({ setShowTasklistForm, tasklist }) {
         }}
       >
         <Modal.Header>
-          <Modal.Title>{"Vytvořit seznam"}</Modal.Title>
+          <Modal.Title>
+            {tasklist?.id
+              ? `Upravit seznam: ${tasklist?.title}`
+              : "Vytvořit seznam"}
+          </Modal.Title>
           <CloseButton onClick={() => setShowTasklistForm(false)} />
         </Modal.Header>
         <Modal.Body style={{ position: "relative" }}>
@@ -60,7 +72,7 @@ function TaskListForm({ setShowTasklistForm, tasklist }) {
               minLength={1}
               name="title"
               // required
-              defaultValue={undefined}
+              defaultValue={tasklist?.title ? tasklist.title : undefined}
             />
           </Form.Group>
         </Modal.Body>
@@ -73,7 +85,7 @@ function TaskListForm({ setShowTasklistForm, tasklist }) {
             Zavřít
           </Button>
           <Button type="submit" variant="primary" disabled={isPending}>
-            {tasklist.id ? "Upravit" : "Vytvořit"}
+            {tasklist?.id ? "Upravit" : "Vytvořit"}
           </Button>
         </Modal.Footer>
       </Form>

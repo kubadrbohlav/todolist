@@ -6,6 +6,7 @@ import { mdiPlus } from "@mdi/js";
 import { TaskListContext } from "./TaskListContext";
 import TaskListForm from "./TaskListForm";
 import TaskListItem from "./TaskListItem";
+import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 
 const TaskListManager = () => {
   const { taskLists } = useContext(TaskListContext);
@@ -17,10 +18,7 @@ const TaskListManager = () => {
         <Icon path={mdiPlus} size={0.7} />
       </Button>
       {!!showTasklistForm ? (
-        <TaskListForm
-          tasklist={showTasklistForm}
-          setShowTasklistForm={setShowTasklistForm}
-        />
+        <TaskListForm setShowTasklistForm={setShowTasklistForm} />
       ) : null}
       <ul>
         {taskLists.map((tasklist) => {

@@ -109,7 +109,6 @@ function TaskListProvider({ children }) {
   }
 
   async function handleDelete(dtoIn) {
-    setTaskListLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8123/tasklist/delete`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -119,9 +118,7 @@ function TaskListProvider({ children }) {
 
     if (response.status < 400) {
       setTaskListLoadObject((current) => {
-        const taskListIndex = current.data.findIndex(
-          (e) => e.id === responseJson.id
-        );
+        const taskListIndex = current.data.findIndex((e) => e.id === dtoIn.id);
         current.data.splice(taskListIndex, 1);
         return { state: "ready", data: current.data };
       });

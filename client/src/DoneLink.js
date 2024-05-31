@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const DoneLink = () => {
   return (
     <ul id="completed-link">
       <li>
-        <Link to="/completed">Dokončené</Link>
+        <NavLink to="/completed">Dokončené</NavLink>
       </li>
     </ul>
   );
