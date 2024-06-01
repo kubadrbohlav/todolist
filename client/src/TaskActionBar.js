@@ -16,7 +16,7 @@ import {
 
 const TaskActionBar = ({ task }) => {
   const navigate = useNavigate();
-  const { state, handlerMap } = useContext(TaskContext);
+  const { handlerMap } = useContext(TaskContext);
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [showConfirmDeleteTaskDialog, setShowConfirmDeleteTaskDialog] =
     useState(false);

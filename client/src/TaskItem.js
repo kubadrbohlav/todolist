@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { TaskContext } from "./TaskContext";
 
 const TaskItem = ({ task }) => {
-  const { state, handlerMap } = useContext(TaskContext);
+  const { handlerMap } = useContext(TaskContext);
 
   const handleCheckboxChange = async (e) => {
     const taskId = e.target.value;
