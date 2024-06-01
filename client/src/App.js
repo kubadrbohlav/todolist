@@ -4,7 +4,7 @@ import TaskListProvider from "./TaskListProvider";
 import TaskProvider from "./TaskProvider";
 import Layout from "./Layout";
 import TaskList from "./TaskList";
-import Task from "./Task";
+import TaskDetail from "./TaskDetail";
 
 function App() {
   //const [searchParams] = useSearchParams();
@@ -21,7 +21,7 @@ function App() {
                 <Route path="/" element={<TaskList done={false} />} />
                 <Route path="/completed" element={<TaskList done={true} />} />
                 <Route path="list" element={<TaskList done={false} />} />
-                <Route path="task" element={<Task />} />
+                <Route path="task" element={<TaskDetail />} />
                 <Route path="*" element={"not found"} />
               </Route>
             </Routes>

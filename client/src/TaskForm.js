@@ -81,19 +81,27 @@ function TaskForm({ setShowTaskForm, task }) {
               type="date"
               name="deadline"
               // required
-              defaultValue={
-                task?.deadline ? eventDateToInput(task.deadline) : undefined
-              }
+              defaultValue={task?.deadline ? task.deadline : undefined}
             />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Priorita</Form.Label>
             <Form.Select name="priority">
-              <option value="none">Žádná</option>
-              <option value="low">Malá</option>
-              <option value="medium">Střední</option>
-              <option value="high">Vysoká</option>
-              <option value="critical">Kritická</option>
+              <option value="none" selected={task?.priority === "none"}>
+                Žádná
+              </option>
+              <option value="low" selected={task?.priority === "low"}>
+                Malá
+              </option>
+              <option value="medium" selected={task?.priority === "medium"}>
+                Střední
+              </option>
+              <option value="high" selected={task?.priority === "high"}>
+                Vysoká
+              </option>
+              <option value="critical" selected={task?.priority === "critical"}>
+                Kritická
+              </option>
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3">
@@ -101,13 +109,24 @@ function TaskForm({ setShowTaskForm, task }) {
             <Form.Select name="tasklistId">
               <option>Vyberte seznam</option>
               {taskLists.map((tasklist) => {
-                return <option value={tasklist.id}>{tasklist.title}</option>;
+                return (
+                  <option
+                    value={tasklist.id}
+                    selected={task?.tasklistId === tasklist.id}
+                  >
+                    {tasklist.title}
+                  </option>
+                );
               })}
             </Form.Select>
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Popis</Form.Label>
-            <textarea class="form-control" name="description"></textarea>
+            <textarea
+              class="form-control"
+              name="description"
+              value={task?.description ? task.description : ""}
+            ></textarea>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
