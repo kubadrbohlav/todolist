@@ -3,6 +3,7 @@ import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 
 import { TaskContext } from "./TaskContext";
 import TaskItem from "./TaskItem";
+import AddTaskButton from "./AddTaskButton";
 
 const TaskList = ({ deadlineUntil, done }) => {
   const { tasks } = useContext(TaskContext);
@@ -36,6 +37,7 @@ const TaskList = ({ deadlineUntil, done }) => {
   });
   return (
     <>
+      <AddTaskButton />
       {filteredTasks.length > 0
         ? filteredTasks.map((task) => {
             return <TaskItem task={task} />;

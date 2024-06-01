@@ -32,7 +32,7 @@ function TaskProvider({ children }) {
   }
 
   async function handleCreate(dtoIn) {
-    setTaskLoadObject((current) => ({ ...current, state: "pending" }));
+    //setTaskLoadObject((current) => ({ ...current, state: "pending" }));
     const response = await fetch(`http://localhost:8123/task/create`, {
       method: "POST",
       headers: {
