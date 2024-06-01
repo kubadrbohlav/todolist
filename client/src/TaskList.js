@@ -40,7 +40,11 @@ const TaskList = ({ deadlineUntil, done }) => {
       <AddTaskButton />
       {filteredTasks.length > 0
         ? filteredTasks.map((task) => {
-            return <TaskItem task={task} />;
+            return (
+              <div className="task-item-wrapper" key={task.id}>
+                <TaskItem task={task} key={task.id} />
+              </div>
+            );
           })
         : null}
       {filteredTasks.length === 0 ? (

@@ -23,20 +23,18 @@ const TaskItem = ({ task }) => {
   const idParam = `id=${task.id}`;
 
   return (
-    <li>
-      <div className="task-item">
-        <Link to={`/task?${idParam}`}>{task.title}</Link>
-        <div className="deadline">{formattedDate(task.deadline)}</div>
-        <input
-          type="checkbox"
-          class="custom-control-input"
-          value={task.id}
-          key={task.id}
-          checked={task.done}
-          onChange={handleCheckboxChange}
-        />
-      </div>
-    </li>
+    <div className="task-item">
+      <Link to={`/task?${idParam}`}>{task.title}</Link>
+      <div className="deadline">{formattedDate(task.deadline)}</div>
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        value={task.id}
+        key={task.id}
+        checked={task.done}
+        onChange={handleCheckboxChange}
+      />
+    </div>
   );
 };
 
