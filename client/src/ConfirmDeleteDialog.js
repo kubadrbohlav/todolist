@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TaskListContext } from "./TaskListContext.js";
+import { TaskContext } from "./TaskContext.js";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -13,6 +14,7 @@ import { mdiLoading } from "@mdi/js";
 function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, tasklist }) {
   const navigate = useNavigate();
   const { state, handlerMap } = useContext(TaskListContext);
+  const { tasks } = useContext(TaskContext);
   const [showAlert, setShowAlert] = useState(null);
   const isPending = state === "pending";
 
@@ -52,7 +54,14 @@ function ConfirmDeleteDialog({ setShowConfirmDeleteDialog, tasklist }) {
           disabled={isPending}
           onClick={async (e) => {
             try {
+              const id = tasklist.id;
               await handlerMap.handleDelete({ id: tasklist.id });
+
+              tasks.forEach((task) => {
+                if (task.tasklistId === id) {
+                  task.tasklistId = null;
+                }
+              });
               setShowConfirmDeleteDialog(false);
               navigate("/");
             } catch (e) {
