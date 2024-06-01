@@ -119,6 +119,7 @@ function TaskForm({ setShowTaskForm, task }) {
                   <option
                     value={tasklist.id}
                     selected={task?.tasklistId === tasklist.id}
+                    key={tasklist.id}
                   >
                     {tasklist.title}
                   </option>
@@ -129,9 +130,9 @@ function TaskForm({ setShowTaskForm, task }) {
           <Form.Group className="mb-3">
             <Form.Label>Popis</Form.Label>
             <textarea
-              class="form-control"
+              className="form-control"
               name="description"
-              value={task?.description ? task.description : ""}
+              defaultValue={task?.description ? task.description : ""}
             ></textarea>
           </Form.Group>
         </Modal.Body>

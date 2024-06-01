@@ -63,7 +63,7 @@ const TaskActionBar = ({ task }) => {
 
       <input
         type="checkbox"
-        class="custom-control-input"
+        className={"custom-control-input"}
         value={task?.id}
         key={task?.id}
         checked={task?.done}

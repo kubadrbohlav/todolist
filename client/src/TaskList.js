@@ -28,7 +28,10 @@ const TaskList = ({ deadlineUntil, done }) => {
     }
     if (deadlineUntil) {
       const maxDate = new Date(deadlineUntil).getTime();
-      if (new Date(task.deadline).getTime() > maxDate) {
+      if (
+        new Date(task.deadline).getTime() > maxDate ||
+        new Date(task.deadline).getTime() < new Date().getTime()
+      ) {
         return false;
       }
     }
@@ -48,7 +51,7 @@ const TaskList = ({ deadlineUntil, done }) => {
           })
         : null}
       {filteredTasks.length === 0 ? (
-        <div class="alert alert-secondary" role="alert">
+        <div className={"alert alert-secondary"} role="alert">
           Máte všechno hotovo :)
         </div>
       ) : null}

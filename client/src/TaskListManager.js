@@ -21,7 +21,7 @@ const TaskListManager = () => {
       ) : null}
       <ul>
         {taskLists.map((tasklist) => {
-          return <TaskListItem tasklist={tasklist} />;
+          return <TaskListItem tasklist={tasklist} key={tasklist.id} />;
         })}
       </ul>
     </div>

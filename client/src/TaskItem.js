@@ -28,7 +28,7 @@ const TaskItem = ({ task }) => {
       <div className="deadline">{formattedDate(task.deadline)}</div>
       <input
         type="checkbox"
-        class="custom-control-input"
+        className={"custom-control-input"}
         value={task.id}
         key={task.id}
         checked={task.done}

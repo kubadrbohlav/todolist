@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
 import { TaskListContext } from "./TaskListContext";
+import { TaskContext } from "./TaskContext";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 import TaskListForm from "./TaskListForm";
 import Button from "react-bootstrap/Button";
@@ -10,6 +11,7 @@ import { mdiPencil, mdiTrashCanOutline } from "@mdi/js";
 
 const TopBar = () => {
   const { taskLists } = useContext(TaskListContext);
+  const { tasks } = useContext(TaskContext);
   const [showTasklistForm, setShowTasklistForm] = useState(false);
   const [showConfirmDeleteDialog, setShowConfirmDeleteDialog] = useState(false);
   const [searchParams] = useSearchParams();
@@ -26,6 +28,9 @@ const TopBar = () => {
       tasklist = taskLists[taskListIndex];
       isTasklistPage = true;
       break;
+    case "/":
+      heading = "Inbox";
+      break;
     case "/today":
       heading = "Dnes";
       break;
@@ -39,8 +44,14 @@ const TopBar = () => {
       heading = null;
   }
 
-  if (location.pathname === "/list") {
-  } else {
+  if (location.pathname === "/task") {
+    const id = searchParams.get("id");
+    const taskIndex = tasks.findIndex((e) => e.id === id);
+    const tasklistId = tasks[taskIndex].tasklistId;
+    if (tasklistId) {
+      const taskListIndex = taskLists.findIndex((e) => e.id === tasklistId);
+      heading = taskLists[taskListIndex]?.title || null;
+    }
   }
 
   return (
