@@ -19,7 +19,7 @@ function TaskProvider({ children }) {
     });
     const responseJson = await response.json();
     if (response.status < 400) {
-      setTaskLoadObject({ state: "ready", data: responseJson });
+      setTaskLoadObject({ state: "ready", data: responseJson.tasks });
       return responseJson;
     } else {
       setTaskLoadObject((current) => ({
@@ -120,7 +120,7 @@ function TaskProvider({ children }) {
 
   const value = {
     state: taskLoadObject.state,
-    taskLists: taskLoadObject.data || [],
+    tasks: taskLoadObject.data || [],
     handlerMap: { handleCreate, handleUpdate, handleDelete },
   };
 

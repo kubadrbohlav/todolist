@@ -18,7 +18,9 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route path="list" element={<TaskList />} />
+                <Route path="/" element={<TaskList done={false} />} />
+                <Route path="/completed" element={<TaskList done={true} />} />
+                <Route path="list" element={<TaskList done={false} />} />
                 <Route path="task" element={<Task />} />
                 <Route path="*" element={"not found"} />
               </Route>

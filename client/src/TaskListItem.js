@@ -6,8 +6,7 @@ const TaskListItem = ({ tasklist }) => {
 
   const isActiveLink =
     location.pathname === "/list" && location.search.includes(idParam);
-  console.log(isActiveLink);
-  console.log(location.search);
+
   return (
     <li>
       <Link

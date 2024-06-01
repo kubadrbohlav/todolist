@@ -6,7 +6,6 @@ import { mdiPlus } from "@mdi/js";
 import { TaskListContext } from "./TaskListContext";
 import TaskListForm from "./TaskListForm";
 import TaskListItem from "./TaskListItem";
-import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 
 const TaskListManager = () => {
   const { taskLists } = useContext(TaskListContext);
