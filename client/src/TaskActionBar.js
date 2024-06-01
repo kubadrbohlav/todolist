@@ -7,7 +7,12 @@ import ConfirmDeleteTaskDialog from "./ConfirmDeleteTaskDialog";
 import { TaskContext } from "./TaskContext";
 
 import Icon from "@mdi/react";
-import { mdiPencil, mdiTrashCanOutline, mdiCalendarMonth } from "@mdi/js";
+import {
+  mdiPencil,
+  mdiTrashCanOutline,
+  mdiCalendarMonth,
+  mdiFlag,
+} from "@mdi/js";
 
 const TaskActionBar = ({ task }) => {
   const navigate = useNavigate();
@@ -15,6 +20,10 @@ const TaskActionBar = ({ task }) => {
   const [showTaskForm, setShowTaskForm] = useState(false);
   const [showConfirmDeleteTaskDialog, setShowConfirmDeleteTaskDialog] =
     useState(false);
+
+  if (!task) {
+    navigate("/");
+  }
 
   const closeDetail = () => {
     if (task.tasklistId) {
@@ -55,15 +64,19 @@ const TaskActionBar = ({ task }) => {
       <input
         type="checkbox"
         class="custom-control-input"
-        value={task.id}
-        key={task.id}
-        checked={task.done}
+        value={task?.id}
+        key={task?.id}
+        checked={task?.done}
         onChange={handleCheckboxChange}
       />
 
       <div className="deadline">
         <Icon path={mdiCalendarMonth} size={1} />
-        <span>{formatDate(task.deadline)}</span>
+        <span>{formatDate(task?.deadline)}</span>
+      </div>
+      <div className="priority">
+        <Icon path={mdiFlag} size={1} />
+        <span>{printPriority(task.priority)}</span>
       </div>
 
       {!!showTaskForm ? (
@@ -112,6 +125,18 @@ function formatDate(inputDate) {
   const monthName = months[date.getMonth()];
 
   return `${dayName}, ${day}. ${monthName}`;
+}
+
+function printPriority(prio) {
+  const table = {
+    none: "Žádná",
+    low: "Malá",
+    medium: "Střední",
+    high: "Vysoká",
+    critical: "Kritická",
+  };
+
+  return table[prio];
 }
 
 export default TaskActionBar;
