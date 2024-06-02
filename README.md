@@ -8,4 +8,4 @@ All about the backend side of the app is located in [server](https://github.com/
 
 ## Client
 
-TODO
+All about the frontend side of the app is located in [client](https://github.com/kubadrbohlav/todolist/tree/master/client) folder.
