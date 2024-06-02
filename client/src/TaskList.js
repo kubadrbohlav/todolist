@@ -55,7 +55,7 @@ const TaskList = ({ deadlineUntil, done, withoutList }) => {
           })
         : null}
       {filteredTasks.length === 0 ? (
-        <div className={"alert alert-secondary"} role="alert">
+        <div className={"alert alert-success"} role="alert">
           Máte všechno hotovo :)
         </div>
       ) : null}
