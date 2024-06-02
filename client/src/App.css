@@ -67,6 +67,10 @@
   margin: 96px 20px 0 371px;
 }
 
+.main h2 {
+  margin: 20px 0;
+}
+
 .add-task-wrapper {
   margin-bottom: 20px;
 }
@@ -121,4 +125,28 @@
 .task-item input[type="checkbox"] {
   display: inline-block;
   margin-right: 20px;
+}
+
+.task-action-bar {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 20px;
+}
+
+.task-action-bar .btn,
+.task-action-bar input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+.task-action-bar .deadline,
+.task-action-bar .priority {
+  position: relative;
+  top: 2px;
+  margin-left: 60px;
+}
+
+.task-action-bar span {
+  margin-left: 7px;
 }

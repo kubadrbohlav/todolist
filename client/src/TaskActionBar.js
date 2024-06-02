@@ -49,7 +49,7 @@ const TaskActionBar = ({ task }) => {
 
   return (
     <div className="task-action-bar">
-      <CloseButton onClick={() => closeDetail()} />
+      <CloseButton onClick={() => closeDetail()} title="Zavřít úkol" />
       <Button onClick={() => setShowTaskForm(true)} size={"sm"}>
         <Icon path={mdiPencil} size={0.7} />
       </Button>
