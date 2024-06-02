@@ -1,4 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
+import Icon from "@mdi/react";
+import { mdiCircleSmall } from "@mdi/js";
 
 const TaskListItem = ({ tasklist }) => {
   const location = useLocation();
@@ -13,7 +15,8 @@ const TaskListItem = ({ tasklist }) => {
         to={`/list?${idParam}`}
         className={isActiveLink ? "active" : undefined}
       >
-        {tasklist.title}
+        <Icon path={mdiCircleSmall} size={1} />
+        <span>{tasklist.title}</span>
       </Link>
     </li>
   );

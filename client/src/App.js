@@ -18,7 +18,10 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Layout />}>
-                <Route path="/" element={<TaskList done={false} />} />
+                <Route
+                  path="/"
+                  element={<TaskList done={false} withoutList={true} />}
+                />
                 <Route path="/completed" element={<TaskList done={true} />} />
                 <Route
                   path="/today"

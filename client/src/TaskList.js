@@ -5,7 +5,7 @@ import { TaskContext } from "./TaskContext";
 import TaskItem from "./TaskItem";
 import AddTaskButton from "./AddTaskButton";
 
-const TaskList = ({ deadlineUntil, done }) => {
+const TaskList = ({ deadlineUntil, done, withoutList }) => {
   const { tasks } = useContext(TaskContext);
   const [searchParams] = useSearchParams();
   const location = useLocation();
@@ -24,6 +24,9 @@ const TaskList = ({ deadlineUntil, done }) => {
       return false;
     }
     if (done !== undefined && task.done !== done) {
+      return false;
+    }
+    if (withoutList === true && task.tasklistId !== null) {
       return false;
     }
     if (deadlineUntil) {

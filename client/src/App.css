@@ -10,7 +10,28 @@
 }
 
 .sidebar ul li a.active {
-  background-color: #ccc;
+  background-color: #e2e2e2;
+}
+.sidebar ul li a:hover {
+  background-color: #eee;
+}
+
+.sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  padding: 15px;
+  font-weight: 600;
+}
+.sidebar a span {
+  display: inline-block;
+  margin-left: 8px;
 }
 
 #top-bar {
@@ -45,4 +66,18 @@
 #tasklist-manager,
 #top-bar {
   border-bottom: 1px solid #000;
+}
+
+#tasklist-manager {
+  position: relative;
+}
+
+#tasklist-manager button {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+}
+
+#tasklist-manager h2 {
+  padding: 15px;
 }
