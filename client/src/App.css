@@ -64,7 +64,7 @@
 
 .main {
   position: relative;
-  margin: 96px 0 0 371px;
+  margin: 96px 20px 0 371px;
 }
 
 .add-task-wrapper {
@@ -90,4 +90,35 @@
 #tasklist-manager h2 {
   padding: 15px;
   color: #333;
+}
+
+.task-item {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e2e2e2;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.2s ease-out;
+}
+
+.task-item:hover {
+  background-color: #eee;
+}
+
+.task-item a {
+  padding: 25px 5px;
+  display: block;
+  width: 80%;
+  color: #333;
+  text-decoration: none;
+}
+.task-item .deadline {
+  font-weight: 600;
+}
+
+.task-item input[type="checkbox"] {
+  display: inline-block;
+  margin-right: 20px;
 }
