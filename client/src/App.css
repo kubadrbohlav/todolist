@@ -41,16 +41,21 @@
   left: 0;
   width: 100%;
   height: 75px;
-  padding-left: 351px;
+  padding-left: 371px;
   background-color: #fff;
 }
 
 #top-bar h1 {
   display: inline-block;
+  line-height: 73px;
+  color: #333;
+  padding-right: 20px;
 }
 
 #top-bar button {
   display: none;
+  vertical-align: text-bottom;
+  margin-left: 7px;
 }
 
 #top-bar.is-tasklist button {
@@ -59,7 +64,11 @@
 
 .main {
   position: relative;
-  margin: 76px 0 0 351px;
+  margin: 96px 0 0 371px;
+}
+
+.add-task-wrapper {
+  margin-bottom: 20px;
 }
 
 #quick-links,
@@ -80,4 +89,5 @@
 
 #tasklist-manager h2 {
   padding: 15px;
+  color: #333;
 }

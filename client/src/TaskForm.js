@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { TaskContext } from "./TaskContext.js";
 import { TaskListContext } from "./TaskListContext.js";
 
@@ -17,6 +17,7 @@ function TaskForm({ setShowTaskForm, task }) {
   const { state, handlerMap } = useContext(TaskContext);
   const { taskLists } = useContext(TaskListContext);
   const [showAlert, setShowAlert] = useState(null);
+  const [searchParams] = useSearchParams();
   const isPending = state === "pending";
 
   return (
@@ -118,7 +119,10 @@ function TaskForm({ setShowTaskForm, task }) {
                 return (
                   <option
                     value={tasklist.id}
-                    selected={task?.tasklistId === tasklist.id}
+                    selected={
+                      task?.tasklistId === tasklist.id ||
+                      tasklist.id === searchParams.get("id")
+                    }
                     key={tasklist.id}
                   >
                     {tasklist.title}
