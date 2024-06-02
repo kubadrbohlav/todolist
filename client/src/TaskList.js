@@ -33,7 +33,8 @@ const TaskList = ({ deadlineUntil, done, withoutList }) => {
       const maxDate = new Date(deadlineUntil).getTime();
       if (
         new Date(task.deadline).getTime() > maxDate ||
-        new Date(task.deadline).getTime() < new Date().getTime()
+        new Date(task.deadline).getTime() <
+          new Date(getCurrentDateFormatted()).getTime()
       ) {
         return false;
       }
@@ -61,5 +62,15 @@ const TaskList = ({ deadlineUntil, done, withoutList }) => {
     </>
   );
 };
+
+function getCurrentDateFormatted() {
+  const date = new Date();
+
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
 
 export default TaskList;
